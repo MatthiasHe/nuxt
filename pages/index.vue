@@ -1,37 +1,28 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        y
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-			<ul id="example-1">
-				<li v-for="item in characters" :key="item.char_id">
-					{{ item }}
-				</li>
-			</ul>
-    </div>
-  </div>
+	<section class="columns is-multiline">
+		<div class="">
+			<input type="text" v-model="nameFilter" placeholder="Search by name.."/>
+			<label>Search by name :</label>
+		</div>
+		<div class="card column is-one-third" v-for="character in filteredCharacters" :key="character.char_id">
+			<div class="card-image">
+				<figure class="image is-4by3">
+					<img :src="character.img" :alt="character.name">
+				</figure>
+			</div>
+			<div class="card-content">
+				<div class="media">
+					<div class="media-content">
+						<p class="title is-4">{{ character.name }}</p>
+						<p class="subtitle is-6">{{ character.status}}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
 </template>
-s
+
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios';
@@ -60,51 +51,19 @@ export default Vue.extend({
   data () {
     return {
       characters: [] as ICharacter[],
+	    nameFilter: '' as string,
     }
   },
-	mounted() {
-  	console.log(this.characters);
+	computed: {
+  	filteredCharacters(): ICharacter[] {
+  		return this.characters.filter(character => {
+  			return character.name.toLowerCase().includes(this.nameFilter.toLowerCase());
+			})
+		}
 	}
 })
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+<style scoped>
 
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
