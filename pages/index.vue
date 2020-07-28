@@ -15,7 +15,7 @@
 				<option v-for="season in seasonsNumber" :value="season">{{ season }}</option>
 			</select>
 		</div>
-		<div class="card column is-one-third" v-for="character in filteredCharacters" :key="character.char_id">
+		<div class="card column is-one-third" v-for="(character, index) in filteredCharacters" :key="index">
 			<div class="card-image">
 				<figure class="image is-4by3">
 					<img :src="character.img" :alt="character.name">
@@ -64,7 +64,7 @@ export default Vue.extend({
   asyncData (): Promise<{ characters: ICharacter[] }> {
   	return axios.get('https://www.breakingbadapi.com/api/characters')
 		  .then((res) => {
-			  return { characters: res.data }
+			  return { characters: res.data.slice(0, 24) }
 		  })
   },
   data () {
@@ -77,6 +77,12 @@ export default Vue.extend({
 	    seasonFilter: 0,
     }
   },
+	mounted() {
+		axios.get('https://www.breakingbadapi.com/api/characters')
+			.then((res) => {
+				this.characters = res.data.concat(res.data);
+			})
+	},
 	computed: {
   	filteredCharacters(): ICharacter[] {
   		return this.characters.filter(character => {
