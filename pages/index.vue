@@ -2,18 +2,23 @@
 	<section class="columns is-multiline">
 		<div class="">
 			<label>Search by name:</label>
-			<input type="text" v-model="nameFilter" placeholder="Search by name.."/>
+			<input class="input" type="text" v-model="nameFilter" placeholder="Search by name.."/>
 
 			<label>Search by status:</label>
-			<select v-model="statusFilter">
-				<option v-for="status in statusesList" :value="status">{{ status ? status : 'All' }}</option>
-			</select>
+			<div class="select">
+				<select v-model="statusFilter">
+					<option v-for="status in statusesList" :value="status">{{ status ? status : 'All' }}</option>
+				</select>
+			</div>
 
 			<label>Search by season:</label>
-			<select v-model="seasonFilter">
-				<option :value="0">All seasons</option>
-				<option v-for="season in seasonsNumber" :value="season">{{ season }}</option>
-			</select>
+			<div class="select">
+				<select v-model="seasonFilter">
+					<option :value="0">All seasons</option>
+					<option v-for="season in seasonsNumber" :value="season">{{ season }}</option>
+				</select>
+			</div>
+
 		</div>
 		<div class="card column is-one-third" v-for="(character, index) in filteredCharacters" :key="index">
 			<div class="card-image">
