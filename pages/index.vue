@@ -27,14 +27,15 @@
 		</section>
 
 		<section class="columns is-multiline">
-			<div class="card column is-one-quarter" v-for="(character, index) in filteredCharacters" :key="index">
-				<div class="card-image">
-					<figure class="image is-square">
-						<img class="character-picture" :src="character.img" :alt="character.name">
-						<figcaption class="is-overlay character-name">{{ character.name }}</figcaption>
-					</figure>
-				</div>
-			</div>
+<!--			<div class="card column is-one-quarter" v-for="(character, index) in filteredCharacters" :key="index">-->
+<!--				<div class="card-image">-->
+<!--					<figure class="image is-square">-->
+<!--						<img class="character-picture" :src="character.img" :alt="character.name">-->
+<!--						<figcaption class="is-overlay character-name">{{ character.name }}</figcaption>-->
+<!--					</figure>-->
+<!--				</div>-->
+<!--			</div>-->
+			<CharacterCard v-for="(character, index) in filteredCharacters" :key="index" :character="character"></CharacterCard>
 		</section>
 	</div>
 
@@ -44,28 +45,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios';
-
-interface ICharacter {
-	char_id: number;
-	name: string;
-	birthday: string;
-	occupation: string[];
-	img: string;
-	status: ECharacterStatus;
-	nickname: string;
-	appearance: number[];
-	portrayed: string;
-	category: string;
-	better_call_saul_appearance: number[];
-}
-
-enum ECharacterStatus {
-	Alive = 'Alive',
-	Deceased = 'Deceased',
-	PresumeDead = 'Presumed dead',
-	Unknow = '?',
-	All = '',
-}
+import { ECharacterStatus } from '~/models/character-status.enum';
+import { ICharacter } from '~/models/character.interface';
 
 export default Vue.extend({
   asyncData (): Promise<{ characters: ICharacter[] }> {
