@@ -1,23 +1,29 @@
 <template>
 	<div>
-		<section>
-				<label>Search by name:</label>
+		<section class="columns is-centered">
+			<div class="column is-half is-narrow">
+				<label class="label">Search by name:</label>
 				<input class="input" type="text" v-model="nameFilter" placeholder="Search by name.."/>
+			</div>
 
-				<label>Search by status:</label>
+			<div class="column is-quarter is-narrow">
+				<label class="label">Search by status:</label>
 				<div class="select">
 					<select v-model="statusFilter">
 						<option v-for="status in statusesList" :value="status">{{ status ? status : 'All' }}</option>
 					</select>
 				</div>
+			</div>
 
-				<label>Search by season:</label>
+			<div class="column is-quarter is-narrow">
+				<label class="label">Search by season:</label>
 				<div class="select">
 					<select v-model="seasonFilter">
 						<option :value="0">All seasons</option>
 						<option v-for="season in seasonsNumber" :value="season">{{ season }}</option>
 					</select>
 				</div>
+			</div>
 		</section>
 
 		<section class="columns is-multiline">
