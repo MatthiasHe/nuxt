@@ -1,41 +1,37 @@
 <template>
-	<section class="columns is-multiline">
-		<div class="">
-			<label>Search by name:</label>
-			<input class="input" type="text" v-model="nameFilter" placeholder="Search by name.."/>
+	<div>
+		<section>
+				<label>Search by name:</label>
+				<input class="input" type="text" v-model="nameFilter" placeholder="Search by name.."/>
 
-			<label>Search by status:</label>
-			<div class="select">
-				<select v-model="statusFilter">
-					<option v-for="status in statusesList" :value="status">{{ status ? status : 'All' }}</option>
-				</select>
-			</div>
+				<label>Search by status:</label>
+				<div class="select">
+					<select v-model="statusFilter">
+						<option v-for="status in statusesList" :value="status">{{ status ? status : 'All' }}</option>
+					</select>
+				</div>
 
-			<label>Search by season:</label>
-			<div class="select">
-				<select v-model="seasonFilter">
-					<option :value="0">All seasons</option>
-					<option v-for="season in seasonsNumber" :value="season">{{ season }}</option>
-				</select>
-			</div>
+				<label>Search by season:</label>
+				<div class="select">
+					<select v-model="seasonFilter">
+						<option :value="0">All seasons</option>
+						<option v-for="season in seasonsNumber" :value="season">{{ season }}</option>
+					</select>
+				</div>
+		</section>
 
-		</div>
-		<div class="card column is-one-third" v-for="(character, index) in filteredCharacters" :key="index">
-			<div class="card-image">
-				<figure class="image is-4by3">
-					<img :src="character.img" :alt="character.name">
-				</figure>
-			</div>
-			<div class="card-content">
-				<div class="media">
-					<div class="media-content">
-						<p class="title is-4">{{ character.name }}</p>
-						<p class="subtitle is-6">{{ character.status}}</p>
-					</div>
+		<section class="columns is-multiline">
+			<div class="card column is-one-quarter" v-for="(character, index) in filteredCharacters" :key="index">
+				<div class="card-image">
+					<figure class="image is-square">
+						<img class="character-picture" :src="character.img" :alt="character.name">
+						<figcaption class="is-overlay character-name">{{ character.name }}</figcaption>
+					</figure>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</div>
+
 
 </template>
 
@@ -79,7 +75,7 @@ export default Vue.extend({
 			statusesList: ECharacterStatus,
 			statusFilter: ECharacterStatus.All as ECharacterStatus,
 			seasonsNumber: 5 as number,
-	    seasonFilter: 0,
+	    seasonFilter: 0 as number,
     }
   },
 	mounted() {
@@ -100,6 +96,22 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.character-name {
+	display: none;
+}
 
+.card:hover {
+	.character-picture {
+		opacity: 0.5;
+	}
+
+	.character-name {
+		display: initial;
+		bottom: initial;
+		top: 50%;
+		transform: translateY(-50%);
+		text-align: center;
+	}
+}
 </style>
