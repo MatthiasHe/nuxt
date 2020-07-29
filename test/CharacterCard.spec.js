@@ -1,10 +1,12 @@
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import CharacterCard from '@/components/CharacterCard'
 import { ECharacterStatus } from '~/models/character-status.enum'
 
 describe('CharacterCard', () => {
-  test('is a Vue instance', () => {
-    const wrapper = mount(CharacterCard, {
+  let wrapper;
+  
+  beforeEach(() => {
+    wrapper = shallowMount(CharacterCard, {
       propsData: {
         character: {
           char_id: 1,
@@ -12,7 +14,7 @@ describe('CharacterCard', () => {
           birthday: '01/01/1001',
           occupation: ['Meth dealer'],
           img: 'http://avatar.fr',
-          status: ECharacterStatus.Alive,
+          status: ECharacterStatus.Deceased,
           nickname: 'Padre',
           appearance: [1, 2 , 3, 4, 5],
           portrayed: 'Brad Pitt',
@@ -21,7 +23,15 @@ describe('CharacterCard', () => {
         },
       },
     })
-    
+  })
+  
+  test('is a Vue instance', () => {
     expect(wrapper.vm).toBeTruthy()
+  })
+  
+  describe('computed nameClass method', () => {
+    test('is equal to is-dead', () => {
+      expect(wrapper.find(".is-dead").exists()).toBe(true);
+    })
   })
 })
