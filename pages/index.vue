@@ -27,14 +27,6 @@
 		</section>
 
 		<section class="columns is-multiline">
-<!--			<div class="card column is-one-quarter" v-for="(character, index) in filteredCharacters" :key="index">-->
-<!--				<div class="card-image">-->
-<!--					<figure class="image is-square">-->
-<!--						<img class="character-picture" :src="character.img" :alt="character.name">-->
-<!--						<figcaption class="is-overlay character-name">{{ character.name }}</figcaption>-->
-<!--					</figure>-->
-<!--				</div>-->
-<!--			</div>-->
 			<CharacterCard v-for="(character, index) in filteredCharacters" :key="index" :character="character"></CharacterCard>
 		</section>
 	</div>
@@ -82,23 +74,3 @@ export default Vue.extend({
 	}
 })
 </script>
-
-<style scoped lang="scss">
-.character-name {
-	display: none;
-}
-
-.card:hover {
-	.character-picture {
-		opacity: 0.5;
-	}
-
-	.character-name {
-		display: initial;
-		bottom: initial;
-		top: 50%;
-		transform: translateY(-50%);
-		text-align: center;
-	}
-}
-</style>
