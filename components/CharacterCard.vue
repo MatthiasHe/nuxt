@@ -46,6 +46,7 @@ export default Vue.extend({
 	.card:hover {
 		.character-picture {
 			opacity: 0.5;
+			transition: .2s ease-in-out;
 		}
 
 		.character-name {

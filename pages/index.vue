@@ -1,12 +1,13 @@
 <template>
 	<div>
-		<section class="columns is-centered">
-			<div class="column is-half is-narrow">
+		<header class="has-text-centered title has-text-white	has-background-primary py-2"><h1>Breaking Bad characters</h1></header>
+		<section class="columns is-centered py-2">
+			<div class="column is-half is-narrow has-text-centered">
 				<label class="label">Search by name:</label>
 				<input class="input" type="text" v-model="nameFilter" placeholder="Search by name.."/>
 			</div>
 
-			<div class="column is-quarter is-narrow">
+			<div class="column is-quarter is-narrow has-text-centered">
 				<label class="label">Search by status:</label>
 				<div class="select">
 					<select v-model="statusFilter">
@@ -15,7 +16,7 @@
 				</div>
 			</div>
 
-			<div class="column is-quarter is-narrow">
+			<div class="column is-quarter is-narrow has-text-centered">
 				<label class="label">Search by season:</label>
 				<div class="select">
 					<select v-model="seasonFilter">
@@ -26,7 +27,7 @@
 			</div>
 		</section>
 
-		<section class="columns is-multiline">
+		<section class="columns is-multiline is-variable is-3-desktop is-2-mobile">
 			<CharacterCard v-for="(character, index) in filteredCharacters" :key="index" :character="character"></CharacterCard>
 		</section>
 	</div>
