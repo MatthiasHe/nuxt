@@ -1,5 +1,5 @@
 <template>
-	<div class="card column is-one-quarter">
+	<div class="card column is-one-quarter-tablet is-2-desktop">
 		<div class="card-image">
 			<figure class="image is-square">
 				<img class="character-picture" :src="character.img" :alt="character.name">
