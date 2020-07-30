@@ -1,10 +1,18 @@
 <template>
 	<div>
-		<header class="has-text-centered title has-text-white	has-background-primary py-2"><h1>Breaking Bad characters</h1></header>
+		<header class="has-text-centered title has-text-white	has-background-primary py-2">
+			<h1>Breaking Bad characters</h1>
+		</header>
+
 		<section class="columns is-centered py-2">
 			<div class="column is-half is-narrow has-text-centered">
 				<label class="label">Search by name:</label>
-				<input class="input" type="text" v-model="nameFilter" placeholder="Search by name.."/>
+				<input
+					class="input"
+					type="text"
+					v-model="nameFilter"
+					placeholder="Search by name.."
+				/>
 			</div>
 
 			<div class="column is-quarter is-narrow has-text-centered">
@@ -31,8 +39,6 @@
 			<CharacterCard v-for="(character, index) in filteredCharacters" :key="index" :character="character"></CharacterCard>
 		</section>
 	</div>
-
-
 </template>
 
 <script lang="ts">
@@ -58,7 +64,7 @@ export default Vue.extend({
 	    seasonFilter: 0 as number,
     }
   },
-	mounted() {
+	created() {
 		axios.get('https://www.breakingbadapi.com/api/characters')
 			.then((res) => {
 				this.characters = res.data.concat(res.data);

@@ -1,10 +1,10 @@
-import { mount, shallowMount } from '@vue/test-utils'
+import { shallowMount, Wrapper } from '@vue/test-utils'
 import CharacterCard from '@/components/CharacterCard'
 import { ECharacterStatus } from '~/models/character-status.enum'
 
 describe('CharacterCard', () => {
-  let wrapper;
-  
+  let wrapper: Wrapper<Vue>;
+
   beforeEach(() => {
     wrapper = shallowMount(CharacterCard, {
       propsData: {
@@ -24,11 +24,11 @@ describe('CharacterCard', () => {
       },
     })
   })
-  
+
   test('is a Vue instance', () => {
     expect(wrapper.vm).toBeTruthy()
   })
-  
+
   describe('computed nameClass method', () => {
     test('is equal to is-dead', () => {
       expect(wrapper.find(".is-dead").exists()).toBe(true);
